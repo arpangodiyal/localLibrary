@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Details</title>
+	</head>
+	<body>
+		<img src = '/{{person.profilePic.url}}' height="100", width="100">
+		<b> {{person.name}} </b> <br>
+		{{person.bio}} <br>
+		{% for interest in interests %}
+	        <li> 
+	        	</b> {{interest.interest}}
+        	</li> <br>
+    	{% endfor %}
+	</body>
+</html>
