@@ -1,13 +1,19 @@
+{% load crispy_forms_tags %}
 <!DOCTYPE html>
 <html>
 	<head>
 		<title>Signup</title>
+		<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" />
 	</head>
 	<body>
 		<form method="POST">
 			{% csrf_token %}
-			{{form.as_p}}
-			<button type="submit">Login</button>
+			<div class = "container">
+				<div class="row"><h1> Sign In </h1></div>
+				<div class = "row">
+					<div class="col-sm-4">{% crispy form %}</div>
+				</div>
+			</div>
 		</form>
 	</body>
 </html>

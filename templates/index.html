@@ -1,32 +1,39 @@
 {% load app_extras %}
+{% load crispy_forms_tags %}
 
 <!DOCTYPE html>
 <html>
 	<head>
 		<title>Data</title>
+		<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" />
 	</head>
 	<body>
 		<form method="POST">
 			{% csrf_token %}
-			{{form.as_p}}
-			<button type="submit">Search</button>
-		</form> <br> <br>
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-4"> {% crispy form %} </div>
+				</div>
+		</form> 
+		<br> <br>
+		
+		<div class="row">
+			{% for person in persons %}
+		        <li> 
+		        	<b> <a href="/app/{{person.id}}">{{person.name}}</a></b>&nbsp;&nbsp;
+		        	{{person.bio}} &nbsp;&nbsp;&nbsp;&nbsp;
+		        	{% if user == person.user %}
+		        		<a href = "/app/edit/{{person.id}}"><b> Edit your details </b></a>
+		        		&nbsp;&nbsp;
+		        		<a href="/app/delete/{{person.id}}"><b> Delete </b></a>
+		        	{% endif %}
+	        	</li> <br>
+	    	{% endfor %}
 
-		{% for person in persons %}
-	        <li> 
-	        	<b> <a href="/app/{{person.id}}">{{person.name}}</a></b>&nbsp;&nbsp;
-	        	{{person.bio}} &nbsp;&nbsp;&nbsp;&nbsp;
-	        	{% if user == person.user %}
-	        		<a href = "/app/edit/{{person.id}}"><b> Edit your details </b></a>
-	        		&nbsp;&nbsp;
-	        		<a href="/app/delete/{{person.id}}"><b> Delete </b></a>
-	        	{% endif %}
-        	</li> <br>
-    	{% endfor %}
-
-    	{% if not f %}
-    		<a href="/app/getDetails"><h5> Enter your details </h5></a>
-    	{% endif %}
-    	<a href="/app/logout"><h5>Logout</h5></a>
+	    	{% if not f %}
+	    		<a href="/app/getDetails"><h5> Enter your details </h5></a>
+	    	{% endif %}
+	    	<a href="/app/logout"><h5>Logout</h5></a>
+	    </div>
 	</body>
 </html>
